@@ -3,14 +3,13 @@
  * Student ID: 5048095
  * Project: Breakout
  * Date:30/1/22
- * Update:n/a
- * Version: 1.0
+ * Update:09/02/22
+ * Version: 2.0
  * Aim: Starts and controls the game
  *
  */
 
 import java.awt.Color;
-
 import javax.swing.JFrame;
 
 public class Breakout extends JFrame{
@@ -18,16 +17,22 @@ public class Breakout extends JFrame{
 	static final long serialVersionUID = 1L;
 	
 	private BreakoutPanel panel;
+	private final static Color BACKGROUND_COLOUR = Color.WHITE;
 	
 	public Breakout() {
-		// TODO: Set the size of the screen (use Settings.WINDOW_WIDTH/HEIGHT)
-		// TODO: Set the title
-		// TODO: Set the background colour to white
-		// TODO: Set resizable to false
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        panel = new BreakoutPanel(this);
-        add(panel);
-		// TODO: Set visible to true
+		
+		
+		//setting up window
+		setTitle(Settings.WINDOW_NAME);
+		setSize(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
+		setLocationRelativeTo(null); // center the window
+        	setResizable(false);
+        	getContentPane().setBackground(BACKGROUND_COLOUR); //check later //setBackground(Color.white);
+       		setDefaultCloseOperation(EXIT_ON_CLOSE);
+        	setVisible(true);
+        	panel = new BreakoutPanel(this); //calling panel
+        	add(panel); //adding panel to window
+            
 	}
 
 	public static void main(String[] args) {
