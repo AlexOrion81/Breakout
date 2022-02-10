@@ -3,13 +3,15 @@
  * Student ID: 5048095
  * Project: Breakout
  * Date:30/1/22
- * Update:09/02/22
- * Version: 2.0
+ * Update:10/02/22
+ * Version: 3.0
  * Aim: building ball object framework
  *
  */
+
 import java.awt.Color;
 import java.awt.Graphics;
+
 
 public class Ball extends Sprite {
 
@@ -21,7 +23,7 @@ public class Ball extends Sprite {
 		setWidth(Settings.BALL_WIDTH);
 		setHeight(Settings.BALL_HEIGHT);
 		setColour(BALL_COLOUR);
-		Sprite.resetToInitialPosition(paddleWidth / 2 - (getWidth() / 2), panelHeight / 2 - (getHeight() / 2));
+	//	setInitialPosition(Settings.WINDOW_WIDTH / 2 - (getWidth() / 2), Settings.WINDOW_HEIGHT / 2 - (getHeight() / 2));
 		resetToInitialPosition();
 	}
 	
@@ -30,46 +32,62 @@ public class Ball extends Sprite {
 	 * Uses Settings.INITIAL_BALL_X/Y to set the position of the ball
 	 */
 	public void resetPosition() {
-		setX(Settings.INITIAL_BALL_X);
-		// TODO: Set the balls y by using the INITIAL_BALL_Y (see above)
+		
+		// Set the balls x
+		setX(Settings.INITIAL_BALL_X); //TODO fix
+		// Set the balls y
+		setY(Settings.INITIAL_BALL_Y); //TODO fix
 	}
 	
 	public void update() {
-		x += xVelocity;
-		// TODO: Increase the y variable by yVelocity (see above)
+		
+		x += xVelocity; //TODO fix
+		// Increase the y variable by yVelocity
+		y += yVelocity; //TODO fix
 		
 		// Bounce off left side of screen
-		if(x <= 0) {
-			// TODO: Set x to 0 so it does not leave the screen
-			// TODO: Change the x velocity to make the ball go right
+		if(x <= 0) { //TODO fix
+			
+			// Set x to 0 so it does not leave the screen
+			x = 0;
+			// Change the x velocity to make the ball go right
+			x *= +1;
+			
 		}
 		
 		// Bounce off right side of screen
 		if(x >= Settings.WINDOW_WIDTH - Settings.BALL_WIDTH) {
 			// TODO: Set x to the right edge of the screen (see the above if condition)
 			// TODO: Change the x velocity to make the ball go left
+			x = Settings.BALL_WIDTH;
+			x *= -1;
 		}
 		
 		// Bounce off top of screen
 		if(y <= 0) {
+			
 			// TODO: Set y to 0 so it does not leave the screen
+			y = 0;
 			// TODO: Change the y velocity to make the ball go downward
+			y *= -1;
 		}
-		
+				
 	}
 	
 	public void setXVelocity(int x) {
 		// TODO: Set the x velocity
+		x = xVelocity;
 	}
 	public void setYVelocity(int y) {
 		// TODO: Set the y velocity
+		y = yVelocity;
 	}
 	
 	public int getXVelocity() {
-		return 0;	// TODO: Return the x velocity
+		return xVelocity;	// TODO: Return the x velocity
 	}
 	public int getYVelocity() {
-		return 0;	// TODO: Return the y velocity
+		return yVelocity;	// TODO: Return the y velocity
 	}
 	
 	public void paint(Graphics g) {
