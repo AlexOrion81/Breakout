@@ -21,18 +21,18 @@ public class Breakout extends JFrame{
 	
 	public Breakout() {
 		
-		
 		//setting up window
 		setTitle(Settings.WINDOW_NAME);
 		setSize(Settings.WINDOW_WIDTH, Settings.WINDOW_HEIGHT);
 		setLocationRelativeTo(null); // center the window
-        	setResizable(false);
-        	getContentPane().setBackground(BACKGROUND_COLOUR); //check later //setBackground(Color.white);
-       		setDefaultCloseOperation(EXIT_ON_CLOSE);
-        	setVisible(true);
-        	panel = new BreakoutPanel(this); //calling panel
-        	add(panel); //adding panel to window
-            
+        setResizable(false);
+        getContentPane().setBackground(BACKGROUND_COLOUR); //check later //setBackground(Color.white);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        panel = new BreakoutPanel(this); //calling breakout panel
+        add(panel); //adding panel to window
+    
+        
 	}
 
 	public static void main(String[] args) {

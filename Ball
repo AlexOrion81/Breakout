@@ -3,22 +3,26 @@
  * Student ID: 5048095
  * Project: Breakout
  * Date:30/1/22
- * Update:n/a
- * Version: 1.0
+ * Update:09/02/22
+ * Version: 2.0
  * Aim: building ball object framework
  *
  */
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Ball extends Sprite {
 
 	private int xVelocity = 1, yVelocity = -1;
-	
+	private final static Color BALL_COLOUR = Color.BLUE;
 	// Constructor
 	public Ball() {
-		// TODO: Set width to Settings.BALL_WIDTH
-		// TODO: Set width to Settings.BALL_HEIGHT
-		// TODO: Call resetPosition
+		
+		setWidth(Settings.BALL_WIDTH);
+		setHeight(Settings.BALL_HEIGHT);
+		setColour(BALL_COLOUR);
+		Sprite.resetToInitialPosition(paddleWidth / 2 - (getWidth() / 2), panelHeight / 2 - (getHeight() / 2));
+		resetToInitialPosition();
 	}
 	
 	/**
