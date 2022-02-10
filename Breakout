@@ -3,8 +3,8 @@
  * Student ID: 5048095
  * Project: Breakout
  * Date:30/1/22
- * Update:09/02/22
- * Version: 2.0
+ * Update:10/02/22
+ * Version: 3.0
  * Aim: Starts and controls the game
  *
  */
@@ -31,8 +31,7 @@ public class Breakout extends JFrame{
         setVisible(true);
         panel = new BreakoutPanel(this); //calling breakout panel
         add(panel); //adding panel to window
-    
-        
+       
 	}
 
 	public static void main(String[] args) {
