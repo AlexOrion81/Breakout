@@ -6,17 +6,15 @@
  * Update:12/02/22
  * Version: 5.0
  * Aim: building ball object framework
- *
  */
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 
 public class Ball extends Sprite {
 
 	private int xVelocity = 1, yVelocity = -1;
-	private final static Color BALL_COLOUR = Color.BLACK;
+
 
 	// Constructor
 	public Ball() {
@@ -35,9 +33,9 @@ public class Ball extends Sprite {
 	public void resetPosition() {
 		
 		// Set the balls x
-		setX(Settings.INITIAL_BALL_X);
+		x = (Settings.INITIAL_BALL_X);
 		// Set the balls y
-		setY(Settings.INITIAL_BALL_Y); 
+		y = (Settings.INITIAL_BALL_Y); 
 	}
 	
 	public void update() {
@@ -52,16 +50,15 @@ public class Ball extends Sprite {
 			// Set x to 0 so it does not leave the screen
 			x = 0;
 			// Change the x velocity to make the ball go right
-			x *= +1;
+			setXVelocity(1);
 			
 		}
 		
 		// Bounce off right side of screen
-		if(x >= Settings.WINDOW_WIDTH - Settings.BALL_WIDTH) {
+		if(x >= Settings.WINDOW_WIDTH - (Settings.BALL_WIDTH + 10)) { /*added extra 10 as it was still going outside the frame a little but still bouncing off the side*/
 			// Setting x to the right edge of the screen
 			// Changing the x velocity to make the ball go left
-			x = Settings.WINDOW_WIDTH;
-			x *= -1;
+			setXVelocity(-1);
 		}
 		
 		// Bounce off top of screen
@@ -69,18 +66,18 @@ public class Ball extends Sprite {
 			// Setting y to 0 so it does not leave the screen
 			y = 0;
 			// Changing the y velocity to make the ball go downward
-			y *= -1;
+			setYVelocity(1);
 		}
 				
 	}
 	
 	public void setXVelocity(int x) {
 		// sets the x velocity
-		x = xVelocity;
+		xVelocity = x; 
 	}
 	public void setYVelocity(int y) {
 		// sets the y velocity
-		y = yVelocity;
+		yVelocity = y; 
 	}
 	
 	public int getXVelocity() {
@@ -93,7 +90,7 @@ public class Ball extends Sprite {
 	}
 	
 	public void paint(Graphics g) {
-		g.setColor(BALL_COLOUR);
+		g.setColor(Settings.BALL_COLOUR);
 		g.fillOval(x, y, Settings.BALL_WIDTH, Settings.BALL_HEIGHT);
 	}
 }

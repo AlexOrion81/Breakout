@@ -1,71 +1,45 @@
+
 /**
  * @author Jaimee Bennett
  * Student ID: 5048095
  * Project: Breakout
  * Date:30/1/22
- * Update:11/02/22
- * Version: 4.0
+ * Update:12/02/22
+ * Version: 5.0
  * Aim: Brick framework
  */
 
 import java.awt.Graphics;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Brick extends Sprite {
-	
+
 	private boolean broken = false;
-	public int brick[][]; 	
-	public int brickWidth;
-	public int brickHeight;
-	BRICK_COLOUR
-	
+
 	public Brick(int x, int y) {
-		{
-			
-			this.x= x;
-			this.y = y;
-			
-			this.brickWidth = w;
-			this.brickHeight = h;
 		
-			brickWidth = Settings.BRICK_WIDTH;
-			brickHeight = Settings.BRICK_HEIGHT;	
-			broken = false;
-		}
+		//Setting x and y
+		this.x = x;
+		this.y = y;
+		//Setting the width and height of the brick
+		setWidth(Settings.BRICK_WIDTH);
+		setHeight(Settings.BRICK_HEIGHT);
 	}
 
 	public boolean isBroken() {
-		
-		//brick is broken
-		
-		//TODO how tell
-		/* Check whether brick is broken
-		Using a nested loop to check whether any of the brick is broken */
-		for (int row = 0; row < ROWS; ++row) {
-			for (int col = 0; col < COLS; ++col) {
-				if (brick[row][col]) {
-					return false; // not broken
-				}
-			}
-		
-					
-		return true; // brick is broken
-		}
+
+		return broken; // brick is broken
 	}
+
 	public void setBroken(boolean b) {
-		// TODO: Set the broken variable using the parameter given
-		
-	this.broken= b;
-		
-		
+
+		// Setting the broken variable
+		broken = b;
 	}
-	
+
 	public void paint(Graphics g) {
-		if(!broken) {
-			g.setColor(BRICK_COLOUR)
+
+		if (!broken) {
+			g.setColor(Settings.BRICK_COLOUR);
 			g.fillRect(x, y, Settings.BRICK_WIDTH, Settings.BRICK_HEIGHT);
 		}
 	}

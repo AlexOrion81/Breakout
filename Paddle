@@ -28,13 +28,13 @@ public class Paddle extends Sprite {
 	public void resetPosition() {
 			
 		// Setting paddles initial position of x 
-		setX(Settings.INITIAL_PADDLE_X);
+		x = (Settings.INITIAL_PADDLE_X);
 		// Setting paddles initial position of y
-		setY(Settings.INITIAL_PADDLE_Y); 
+		y = (Settings.INITIAL_PADDLE_Y); 
 	}
 
 	public void update() {
-		
+	
 		x += xVelocity;
 		
 		// Preventing the paddle from moving outside of the screen
