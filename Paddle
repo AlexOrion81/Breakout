@@ -34,7 +34,7 @@ public class Paddle extends Sprite {
 	}
 
 	public void update() {
-		
+	
 		x += xVelocity;
 		
 		// Preventing the paddle from moving outside of the screen
@@ -44,7 +44,6 @@ public class Paddle extends Sprite {
 			if (x >= Settings.WINDOW_WIDTH - Settings.PADDLE_WIDTH) {
 			x = Settings.WINDOW_WIDTH - Settings.PADDLE_WIDTH;
 		}
-		
 	}
 	
 	public void paint(Graphics g) {
