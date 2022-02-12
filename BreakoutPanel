@@ -2,16 +2,12 @@
  * @author Jaimee Bennett
  * Student ID: 5048095
  * Date:30/1/22
- * Update:11/02/22
- * Version: 4.0
+ * Update:12/02/22
+ * Version: 5.0
  * Aim: building framework for game panel
  *
  */
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -38,17 +34,19 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 		addKeyListener(this);
 		setFocusable(true);
 		
-	
+		//timer for game
 		Timer timer = new Timer(5, this);
 		timer.start();
-		
-		ball = new Ball();
-		paddle = new Paddle();
-		bricks[Settings.TOTAL_BRICKS] = new Brick(x, y);
-		
-		// TODO: Create a new bricks array (Use Settings.TOTAL_BRICKS)
-	
-		createBricks();
+				
+	    //Create a new ball object
+        ball = new Ball();
+        //Create a new paddle object
+        paddle = new Paddle();
+        //Create a new bricks array
+        bricks = new Brick[Settings.TOTAL_BRICKS];
+        
+        //Call the createBricks() method
+        createBricks();
 	}
 	
 	private void createBricks() {
@@ -67,14 +65,21 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	}
 	
 	private void paintBricks(Graphics g) {
-		// TODO: Loop through the bricks and call the paint() method
-		
-		paint(g);
+
+		//Loop through the bricks and call the paint() method
+          for (int i = 0; i < Settings.TOTAL_BRICKS; i++) {
+              for (int j = 0; j < Settings.TOTAL_BRICKS; j++) {
+               
+                   bricks[j].paint(g); 
+              }
+          }       
 	}
 	
 	private void update() {
 		if(gameRunning) {
-			// TODO: Update the ball and paddle
+			// Update the ball and paddle
+			paddle.update();
+			ball.update();
 			collisions();
 			repaint();
 		}
@@ -83,6 +88,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private void gameOver() {
 		// Set screen message for game over
 		screenMessage = "Game Over";
+	
 		stopGame();
 	}
 	
@@ -171,12 +177,16 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
         paddle.paint(g);
         paintBricks(g);
         
-        // Draw lives left
-        // TODO: Draw lives left in the top left hand corner
         
+       // Draw lives left in the top left hand corner           
+        g.setFont(new Font("Arial", Font.BOLD, 12));
+        g.setColor(Settings.LIVES_COLOUR);
+        g.drawString("Lives: "+ livesLeft, (Settings.LIVES_POSITION_X), (Settings.LIVES_POSITION_Y));
+               
         // Draw screen message
         if(screenMessage != null) {
         	g.setFont(new Font("Arial", Font.BOLD, 18));
+        	g.setColor(Settings.MESSAGE_COLOUR);
         	int messageWidth = g.getFontMetrics().stringWidth(screenMessage);
         	g.drawString(screenMessage, (Settings.WINDOW_WIDTH / 2) - (messageWidth / 2), Settings.MESSAGE_POSITION);
         }
@@ -184,49 +194,26 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO: Set the velocity of the paddle depending on whether the player is pressing left or right
-		if(e.getKeyCode() == KeyEvent.VK_ENTER) {			
-			new Thread(() -> { //TODO fix
-			
-			while(true) {
-				update();
-			
-				try {
-					Thread.sleep(10);
-				} catch(InterruptedException err){
-					err.printStackTrace();
-				}
-			}
-			
-		}).start();
 		
-	}
-		
+		//Setting the velocity of the paddle depending on whether the player is pressing left or right
 		if(e.getKeyCode() ==  KeyEvent.VK_RIGHT && paddle.x < (getWidth() - paddle.width)) {
-			System.out.println("right"); //testing
-			paddle.x += 15; //how far each press is to the right
-			
+			System.out.println("Right"); //testing
+			paddle.setXVelocity(2); //how far each press is to the right			
 		}
 		
 		if(e.getKeyCode() ==  KeyEvent.VK_LEFT && paddle.x > 0) {
 			System.out.println("left"); //testing
-			paddle.x -= 15; //how far each press is to the left
-			
+			paddle.setXVelocity(-2); //how far each press is to the left			
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO: Set the velocity of the paddle after the player has released the keys
-		int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-            x = 0;
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-            x = 0;
-        }
+		
+		//Set the velocity of the paddle after the player has released the keys
+        if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            paddle.setXVelocity(0);
+        }   
 	}
 
 	@Override
@@ -236,6 +223,7 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		
 		update();
 	}
 
