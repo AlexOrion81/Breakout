@@ -2,8 +2,8 @@
  * @author Jaimee Bennett
  * Student ID: 5048095
  * Date:30/1/22
- * Update:10/02/22
- * Version: 3.0
+ * Update:11/02/22
+ * Version: 4.0
  * Aim: building framework for game panel
  *
  */
@@ -31,20 +31,21 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	private Ball ball;
 	private Paddle paddle;
 	private Brick bricks[];
+
 	
 	public BreakoutPanel(Breakout game) {
 		
 		addKeyListener(this);
 		setFocusable(true);
 		
+	
 		Timer timer = new Timer(5, this);
 		timer.start();
 		
 		ball = new Ball();
 		paddle = new Paddle();
 		bricks[Settings.TOTAL_BRICKS] = new Brick(x, y);
-		// TODO: Create a new ball object and assign it to the appropriate variable
-		// TODO: Create a new paddle object and assign it to the appropriate variable
+		
 		// TODO: Create a new bricks array (Use Settings.TOTAL_BRICKS)
 	
 		createBricks();
@@ -184,11 +185,48 @@ public class BreakoutPanel extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO: Set the velocity of the paddle depending on whether the player is pressing left or right
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {			
+			new Thread(() -> { //TODO fix
+			
+			while(true) {
+				update();
+			
+				try {
+					Thread.sleep(10);
+				} catch(InterruptedException err){
+					err.printStackTrace();
+				}
+			}
+			
+		}).start();
+		
+	}
+		
+		if(e.getKeyCode() ==  KeyEvent.VK_RIGHT && paddle.x < (getWidth() - paddle.width)) {
+			System.out.println("right"); //testing
+			paddle.x += 15; //how far each press is to the right
+			
+		}
+		
+		if(e.getKeyCode() ==  KeyEvent.VK_LEFT && paddle.x > 0) {
+			System.out.println("left"); //testing
+			paddle.x -= 15; //how far each press is to the left
+			
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO: Set the velocity of the paddle after the player has released the keys
+		int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+            x = 0;
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+            x = 0;
+        }
 	}
 
 	@Override
