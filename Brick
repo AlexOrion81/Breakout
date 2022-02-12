@@ -9,16 +9,11 @@
  * Aim: Brick framework
  */
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Brick extends Sprite {
 
 	private boolean broken = false;
-	public int brick[][];
-	public int brickWidth;
-	public int brickHeight;
-	private final static Color BRICK_COLOUR = Color.BLUE;
 
 	public Brick(int x, int y) {
 		
@@ -26,25 +21,25 @@ public class Brick extends Sprite {
 		this.x = x;
 		this.y = y;
 		//Setting the width and height of the brick
-		brickWidth = Settings.BRICK_WIDTH;
-		brickHeight = Settings.BRICK_HEIGHT;
+		setWidth(Settings.BRICK_WIDTH);
+		setHeight(Settings.BRICK_HEIGHT);
 	}
 
 	public boolean isBroken() {
 
-		return true; // brick is broken
+		return broken; // brick is broken
 	}
 
 	public void setBroken(boolean b) {
 
 		// Setting the broken variable
-		this.broken = b;
+		broken = b;
 	}
 
 	public void paint(Graphics g) {
 
 		if (!broken) {
-			g.setColor(BRICK_COLOUR);
+			g.setColor(Settings.BRICK_COLOUR);
 			g.fillRect(x, y, Settings.BRICK_WIDTH, Settings.BRICK_HEIGHT);
 		}
 	}
