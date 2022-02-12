@@ -3,18 +3,20 @@
  * Student ID: 5048095
  * Project: Breakout
  * Date:30/1/22
- * Update:11/02/22
- * Version: 4.0
+ * Update:12/02/22
+ * Version: 5.0
  * Aim: building ball object framework
  *
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 
 public class Ball extends Sprite {
 
 	private int xVelocity = 1, yVelocity = -1;
+	private final static Color BALL_COLOUR = Color.BLACK;
 
 	// Constructor
 	public Ball() {
@@ -39,7 +41,7 @@ public class Ball extends Sprite {
 	}
 	
 	public void update() {
-		
+		// Increase the x variable by xVelocity
 		x += xVelocity; 
 		// Increase the y variable by yVelocity
 		y += yVelocity; 
@@ -56,15 +58,14 @@ public class Ball extends Sprite {
 		
 		// Bounce off right side of screen
 		if(x >= Settings.WINDOW_WIDTH - Settings.BALL_WIDTH) {
-			// Setting x to the right edge of the screen (see the above if condition)
+			// Setting x to the right edge of the screen
 			// Changing the x velocity to make the ball go left
-			x = Settings.BALL_WIDTH;
+			x = Settings.WINDOW_WIDTH;
 			x *= -1;
 		}
 		
 		// Bounce off top of screen
 		if(y <= 0) {
-			
 			// Setting y to 0 so it does not leave the screen
 			y = 0;
 			// Changing the y velocity to make the ball go downward
@@ -83,13 +84,16 @@ public class Ball extends Sprite {
 	}
 	
 	public int getXVelocity() {
+		// returns the x velocity
 		return x;	
 	}
 	public int getYVelocity() {
+		// returns the y velocity
 		return y;	
 	}
 	
 	public void paint(Graphics g) {
+		g.setColor(BALL_COLOUR);
 		g.fillOval(x, y, Settings.BALL_WIDTH, Settings.BALL_HEIGHT);
 	}
 }
